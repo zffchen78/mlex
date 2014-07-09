@@ -30,7 +30,7 @@ beta = 3;            % weight of sparsity penalty term
 %  display a random sample of 200 patches from the dataset
 
 patches = sampleIMAGES;
-display_network(patches(:,randi(size(patches,2),200,1)),8);
+% display_network(patches(:,randi(size(patches,2),200,1)),8);
 
 
 %  Obtain random parameters theta
@@ -81,7 +81,7 @@ theta = initializeParameters(hiddenSize, visibleSize);
 % for the sparse autoencoder.  
 sFun = @(x) sparseAutoencoderCost(x, visibleSize, hiddenSize, lambda, ...
                                   sparsityParam, beta, patches);
-numgrad = computeNumericalGradient(sFun, theta);
+% numgrad = computeNumericalGradient(sFun, theta);
  
 % Use this to visually compare the gradients side by side
 % disp([numgrad grad]); 
