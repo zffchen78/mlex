@@ -42,23 +42,28 @@ b2grad = zeros(size(b2));
 % the gradient descent update to W1 would be W1 := W1 - alpha * W1grad, and similarly for W2, b1, b2. 
 % 
 
+% Forward
+x = a1 = y = data;
+m = size(data, 2);
+z2 = W1 * a1 + repmat(b1, 1, m);
+a2 = sigmoid(z2);
+z3 = W2 * a2 + repmat(b2, 1, m);
+a3 = sigmoid(z3);
 
+s = sparsityParam;
+r = mean(a2, 2);
+kl = s .* log(s ./ r) + (1 - s) .* log((1-s) ./ (1-r));
 
+cost = sum(sum((a3 - y).^2)) / 2 / m + lambda / 2 * (sum(sum(W1.^2)) + sum(sum(W2.^2))) + beta * sum(kl);
 
+% Backward
+d3 = - (y - a3) .* (a3 .* (1 - a3));
+d2 = (W2' * d3 + repmat(beta .* (-s./r + (1-s)./(1-r)), 1, m)) .* (a2 .* (1 - a2));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+W2grad = d3 * a2' / m + lambda * W2;
+b2grad = d3 * ones(m, 1) / m;
+W1grad = d2 * a1' / m + lambda * W1;
+b1grad = d2 * ones(m, 1) / m;
 
 %-------------------------------------------------------------------
 % After computing the cost and gradient, we will convert the gradients back

@@ -6,6 +6,7 @@ load IMAGES;    % load images from disk
 
 patchsize = 8;  % we'll use 8x8 patches 
 numpatches = 10000;
+%numpatches = 10;
 
 % Initialize patches with zeros.  Your code will fill in this matrix--one
 % column per patch, 10000 columns. 
@@ -24,13 +25,11 @@ patches = zeros(patchsize*patchsize, numpatches);
 %  patch corresponding to the pixels in the block (21,21) to (30,30) of
 %  Image 1
 
-
-
-
-
-
-
-
+for i = 1:numpatches
+    s = [1 1 1] + floor(rand(1, 3) .* (size(IMAGES) - [patchsize patchsize 0]));
+    t = s + [patchsize patchsize 0] - [1 1 0];
+    patches(:, i) = IMAGES(s(1):t(1), s(2):t(2), s(3))(:);
+end
 
 
 %% ---------------------------------------------------------------

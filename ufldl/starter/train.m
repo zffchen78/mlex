@@ -16,6 +16,7 @@
 
 visibleSize = 8*8;   % number of input units 
 hiddenSize = 25;     % number of hidden units 
+% hiddenSize = 2;     % number of hidden units
 sparsityParam = 0.01;   % desired average activation of the hidden units.
                      % (This was denoted by the Greek alphabet rho, which looks like a lower-case "p",
 		     %  in the lecture notes). 
@@ -64,7 +65,6 @@ theta = initializeParameters(hiddenSize, visibleSize);
 
 [cost, grad] = sparseAutoencoderCost(theta, visibleSize, hiddenSize, lambda, ...
                                      sparsityParam, beta, patches);
-
 %%======================================================================
 %% STEP 3: Gradient Checking
 %
@@ -75,21 +75,20 @@ theta = initializeParameters(hiddenSize, visibleSize);
 % First, lets make sure your numerical gradient computation is correct for a
 % simple function.  After you have implemented computeNumericalGradient.m,
 % run the following: 
-checkNumericalGradient();
+% checkNumericalGradient();
 
 % Now we can use it to check your cost function and derivative calculations
 % for the sparse autoencoder.  
-numgrad = computeNumericalGradient( @(x) sparseAutoencoderCost(x, visibleSize, ...
-                                                  hiddenSize, lambda, ...
-                                                  sparsityParam, beta, ...
-                                                  patches), theta);
-
+sFun = @(x) sparseAutoencoderCost(x, visibleSize, hiddenSize, lambda, ...
+                                  sparsityParam, beta, patches);
+numgrad = computeNumericalGradient(sFun, theta);
+ 
 % Use this to visually compare the gradients side by side
-disp([numgrad grad]); 
+% disp([numgrad grad]); 
 
 % Compare numerically computed gradients with the ones obtained from backpropagation
-diff = norm(numgrad-grad)/norm(numgrad+grad);
-disp(diff); % Should be small. In our implementation, these values are
+%diff = norm(numgrad-grad)/norm(numgrad+grad);
+%disp(diff); % Should be small. In our implementation, these values are
             % usually less than 1e-9.
 
             % When you got this working, Congratulations!!! 
@@ -111,7 +110,7 @@ options.Method = 'lbfgs'; % Here, we use L-BFGS to optimize our cost
                           % sparseAutoencoderCost.m satisfies this.
 options.maxIter = 400;	  % Maximum number of iterations of L-BFGS to run 
 options.display = 'on';
-
+options.useMex = 0;
 
 [opttheta, cost] = minFunc( @(p) sparseAutoencoderCost(p, ...
                                    visibleSize, hiddenSize, ...

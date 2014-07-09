@@ -89,11 +89,14 @@ else
     end
 end
 
-if opt_graycolor
-    h=imagesc(array,'EraseMode','none',[-1 1]);
-else
-    h=imagesc(array,'EraseMode','none',[-1 1]);
-end
+figure(1, 'visible', 'off');
+%if opt_graycolor
+%    h=imagesc(array,'EraseMode','none',[-1 1]);
+%else
+%    h=imagesc(array,'EraseMode','none',[-1 1]);
+%end
+h = imagesc(array);
+print -dsvg '/home/zhifengc/www/no_crawl/x.svg'
 axis image off
 
 drawnow;
