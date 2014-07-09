@@ -81,7 +81,7 @@ theta = initializeParameters(hiddenSize, visibleSize);
 % for the sparse autoencoder.  
 sFun = @(x) sparseAutoencoderCost(x, visibleSize, hiddenSize, lambda, ...
                                   sparsityParam, beta, patches);
-numgrad = computeNumericalGradient(sFun, theta);
+% numgrad = computeNumericalGradient(sFun, theta);
  
 % Use this to visually compare the gradients side by side
 % disp([numgrad grad]); 

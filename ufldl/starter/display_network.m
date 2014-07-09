@@ -96,7 +96,6 @@ figure(1, 'visible', 'off');
 %    h=imagesc(array,'EraseMode','none',[-1 1]);
 %end
 h = imagesc(array);
-print -dsvg '/home/zhifengc/www/no_crawl/x.svg'
 axis image off
 
 drawnow;
