@@ -14,14 +14,19 @@
 %  allow your sparse autoencoder to get good filters; you do not need to 
 %  change the parameters below.
 
-visibleSize = 8*8;   % number of input units 
-hiddenSize = 25;     % number of hidden units 
-% hiddenSize = 2;     % number of hidden units
-sparsityParam = 0.01;   % desired average activation of the hidden units.
+% visibleSize = 8*8;   % number of input units 
+% hiddenSize = 25;     % number of hidden units 
+%sparsityParam = 0.01;   % desired average activation of the hidden units.
                      % (This was denoted by the Greek alphabet rho, which looks like a lower-case "p",
 		     %  in the lecture notes). 
-lambda = 0.0001;     % weight decay parameter       
-beta = 3;            % weight of sparsity penalty term       
+%lambda = 0.0001;     % weight decay parameter       
+%beta = 3;            % weight of sparsity penalty term       
+
+visibleSize = 28*28;
+hiddenSize = 196;
+sparsityParam = 0.1;
+lambda = 3e-3;
+beta = 3;
 
 %%======================================================================
 %% STEP 1: Implement sampleIMAGES
@@ -29,9 +34,10 @@ beta = 3;            % weight of sparsity penalty term
 %  After implementing sampleIMAGES, the display_network command should
 %  display a random sample of 200 patches from the dataset
 
-patches = sampleIMAGES;
-% display_network(patches(:,randi(size(patches,2),200,1)),8);
-
+%patches = sampleIMAGES;
+images = loadMNISTImages('train-images-idx3-ubyte');
+patches = images(:,1:10000);
+display_network(patches(:,randi(size(patches,2),200,1)),8);
 
 %  Obtain random parameters theta
 theta = initializeParameters(hiddenSize, visibleSize);
@@ -90,7 +96,6 @@ sFun = @(x) sparseAutoencoderCost(x, visibleSize, hiddenSize, lambda, ...
 %diff = norm(numgrad-grad)/norm(numgrad+grad);
 %disp(diff); % Should be small. In our implementation, these values are
             % usually less than 1e-9.
-
             % When you got this working, Congratulations!!! 
 
 %%======================================================================
@@ -125,5 +130,3 @@ W1 = reshape(opttheta(1:hiddenSize*visibleSize), hiddenSize, visibleSize);
 display_network(W1', 12); 
 
 print -djpeg weights.jpg   % save the visualization to a file 
-
-
