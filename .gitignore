@@ -3,3 +3,5 @@
 /ufldl/starter/train-images-idx3-ubyte
 /ufldl/starter/train-labels-idx1-ubyte
 /ufldl/starter/weights.jpg
+/.DS_Store
+/ufldl/.DS_Store
