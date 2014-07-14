@@ -5,3 +5,12 @@
 /ufldl/starter/weights.jpg
 /.DS_Store
 /ufldl/.DS_Store
+/ufldl/softmax/.DS_Store
+/ufldl/softmax/t10k-images-idx3-ubyte
+/ufldl/softmax/t10k-labels-idx1-ubyte
+/ufldl/softmax/train-images-idx3-ubyte
+/ufldl/softmax/train-labels-idx1-ubyte
+/ufldl/softmax/softmaxExercise.m~
+/ufldl/softmax/softmaxPredict.m~
+/ufldl/softmax/softmaxTrain.m~
+/ufldl/softmax/softmaxCost.m~
