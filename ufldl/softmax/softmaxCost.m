@@ -34,7 +34,7 @@ cost = - (1 / numCases) * sum(sum(groundTruth .* log(h))) + \
 % Comment: I can derive the gradient from the cost function J(theta).
 % Just note that the factor \sigma 1{y(i)==j}log(exp(theta_j^t *
 % x^(i)) / \sigma) is a bit tricky. When y(i) != j, the item still
-% contribute to the gradient via a factor whose nominator does not
+% contributes to the gradient via a factor whose numinator does not
 % depend on theta_j but its denominator does.
 
 thetagrad = - (1 / numCases) * (groundTruth - h) * data' + lambda * theta;;
